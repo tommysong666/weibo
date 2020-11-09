@@ -25,7 +25,7 @@ class UsersController extends Controller
         ]);
         $user=User::create([
             'name'=>$request->name,
-            'password'=>$request->password,
+            'password'=>bcrypt($request->password),
             'email'=>$request->email
         ]);
         session()->flash('success','注册成功，开启新旅程');
