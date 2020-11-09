@@ -23,7 +23,13 @@ class UsersController extends Controller
             'email'=>'required|unique:users|email|max:255',
             'password'=>'required|confirmed|min:6',
         ]);
-        return;
+        $user=User::create([
+            'name'=>$request->name,
+            'password'=>$request->password,
+            'email'=>$request->email
+        ]);
+        session()->flash('success','注册成功，开启新旅程');
+        return redirect()->route('users.show',$user);
     }
 
 }
