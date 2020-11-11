@@ -20,6 +20,10 @@
         <input type="password"
                class="form-control" name="password" value="{{old('password')}}">
         <small id="helpId" class="form-text text-muted">请输入密码</small>
+        <div class="form-check ml-2">
+        <input type="checkbox" class="form-check-input" name="remember" id="exampleCheck1"/>
+        <label class="form-check-label" for="exampleCheck1">记住我</label>
+        </div>
       </div>
         <button class="btn btn-primary" type="submit">登陆</button>
       </form>
