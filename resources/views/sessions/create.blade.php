@@ -16,7 +16,7 @@
         <input type="email"
                class="form-control" name="email" value="{{old('email')}}">
         <small id="helpId" class="form-text text-muted">请输入注册邮箱</small>
-        <label for="password">密码</label>
+        <label for="password">密码(<a href="{{route('password.request')}}">忘记密码？</a>)</label>
         <input type="password"
                class="form-control" name="password" value="{{old('password')}}">
         <small id="helpId" class="form-text text-muted">请输入密码</small>

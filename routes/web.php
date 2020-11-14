@@ -25,3 +25,11 @@ Route::delete('logout','SessionsController@destroy')->name('logout');
 
 Route::get('signup/activated/{token}','UsersController@activated')->name('activated_email');//激活邮箱
 
+//显示重置密码视图
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+//邮箱发送重设链接
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+//显示密码更新视图
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+//执行密码更新操作
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
