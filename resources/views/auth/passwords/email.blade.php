@@ -24,16 +24,16 @@
                   <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
                          value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-                  {{--@error('email')
+                  @error('email')
                       <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
                       </span>
-                  @enderror--}}
-                  @if (session('status'))
+                  @enderror
+                  {{--@if (session('status'))
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ session('status') }}</strong>
                   </span>
-                  @endif
+                  @endif--}}
                 </div>
               </div>
 

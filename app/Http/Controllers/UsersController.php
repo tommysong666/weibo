@@ -55,7 +55,7 @@ class UsersController extends Controller
         $this->validate($request,[
             'name'=>'required|min:3|max:50',
             'email'=>'required|unique:users|email|max:255',
-            'password'=>'required|confirmed|min:6',
+            'password'=>'required|confirmed|min:8',
         ]);
         $user=User::create([
             'name'=>$request->name,
@@ -92,7 +92,7 @@ class UsersController extends Controller
         $this->authorize('update',$user);
         $this->validate($request,[
             'name'=>'required|max:50',
-            'password'=>'nullable|confirmed|min:6'
+            'password'=>'nullable|confirmed|min:8'
         ]);
         $data=[];
         $data['name']=$request->name;
