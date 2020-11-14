@@ -132,12 +132,13 @@ class UsersController extends Controller
     {
         $view='emails.activation_email';
         $data=compact('user');
-        $from='tommy@example.com';
-        $from_name='tommy';
+        /*$from='tommy@example.com';
+        $from_name='tommy';*/
         $to=$user->email;
         $subject='感谢注册微博网，请确认你的邮箱！';
-        Mail::send($view,$data,function ($mailInfo) use ($from,$from_name,$to,$subject){
-            $mailInfo->from($from,$from_name)->to($to)->subject($subject);
+        Mail::send($view,$data,function ($mailInfo) use ($to,$subject){
+            //$mailInfo->from($from,$from_name)->to($to)->subject($subject);
+            $mailInfo->to($to)->subject($subject);
         });
     }
 
