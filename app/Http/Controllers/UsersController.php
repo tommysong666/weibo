@@ -129,6 +129,10 @@ class UsersController extends Controller
         return back();
     }
 
+    /**
+     * 发送验证链接
+     * @param $user
+     */
     public function sendEmailConfirmationTo($user)
     {
         $view='emails.activation_email';
