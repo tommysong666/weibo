@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 /**
- * 用户注册类
+ * 用户CRUD
  * Class UsersController
  * @package App\Http\Controllers
  */
@@ -41,7 +41,8 @@ class UsersController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(User $user){
-        return view('users.show',compact('user'));
+        $statuses=$user->statuses()->orderByDesc('created_at')->paginate(10);
+        return view('users.show',compact('user','statuses'));
     }
 
     /**
