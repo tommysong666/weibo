@@ -42,15 +42,15 @@ class User extends Authenticatable
     {
         parent::boot();
         static::creating(
-            function($user){
-                $user->activation_token=Str::random(10);
+            function ($user) {
+                $user->activation_token = Str::random(10);
             }
         );
     }
 
-    public function gravatar($size=100)
+    public function gravatar($size = 100)
     {
-        $hash=md5(strtolower(trim($this->attributes['email'])));
+        $hash = md5(strtolower(trim($this->attributes['email'])));
         return "http://www.gravatar.com/avatar/$hash/s=$size";
     }
 
@@ -61,32 +61,37 @@ class User extends Authenticatable
 
     public function feed()
     {
-        return $this->statuses()->orderByDesc('created_at');
+        $user_ids = $this->followings->pluck('id')->toArray();
+        array_push($user_ids,$this->id);
+//        dd(Status::whereIn('user_id', $user_ids)->with('user')->orderByDesc('created_at')->paginate(10)->toArray());
+        return Status::whereIn('user_id', $user_ids)->with('user')->orderByDesc('created_at');
+//        return $this->statuses()->orderByDesc('created_at');
     }
 
     public function followers()
     {
-        return $this->belongsToMany(User::class,'followers','user_id','follower_id');
+        return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id');
     }
+
     public function followings()
     {
-        return $this->belongsToMany(User::class,'followers','follower_id','user_id');
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
     }
 
     public function follow($user_ids)
     {
-        if(!is_array($user_ids)){
-            $user_ids=compact('user_ids');
+        if (!is_array($user_ids)) {
+            $user_ids = compact('user_ids');
         }
-        $this->followings()->sync($user_ids,false);
+        $this->followings()->sync($user_ids, false);
     }
 
     public function unfollow($user_ids)
     {
-        if(!is_array($user_ids)){
-            $user_ids=compact('user_ids');
+        if (!is_array($user_ids)) {
+            $user_ids = compact('user_ids');
         }
-        $this->followings()->detach($user_ids,false);
+        $this->followings()->detach($user_ids, false);
     }
 
     public function isFollowing($user_id)

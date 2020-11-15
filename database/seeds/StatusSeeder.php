@@ -13,6 +13,6 @@ class StatusSeeder extends Seeder
     public function run()
     {
         //
-        factory(Status::class)->times(100)->create();
+        factory(Status::class)->times(150)->create();
     }
 }
