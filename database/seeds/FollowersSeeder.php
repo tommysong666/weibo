@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\User;
 
 class FollowersSeeder extends Seeder
 {
@@ -11,12 +12,12 @@ class FollowersSeeder extends Seeder
      */
     public function run()
     {
-        $users=\App\Models\User::all();
+        $users=User::all();
         $user=$users->first();
         $user_id=$user->id;
 
         // 获取去除掉 ID 为 1 的所有用户 ID 数组
-        $followers=$users->slice(1);
+        $followers=$users->slice($user_id);
         $follower_ids=$followers->pluck('id')->toArray();
 
         // 关注除了 1 号用户以外的所有用户
